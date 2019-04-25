@@ -1,0 +1,15 @@
+body {
+    font-size: 2em;
+    background-color: lightblue;
+    font-family: "微軟正黑體";
+}
+
+.form-control {
+
+    font-size: 1em;
+}
+
+.btn {
+    height: 30%;
+    font-size: 1.5em;
+}

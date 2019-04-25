@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="container">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title text-center">
+          <br>
+          <h1>用戶資訊</h1><hr>
+        </div>
+      </div>
+      <div class="panel-body">
+        {% if user %}
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-secondary">電子信箱: {{user.email}}</li>
+            <li class="list-group-item">姓名: {{user.name}}</li>
+          </ul>
+        {% else %}
+          <h3>無個人檔案</h3>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endblock %}
