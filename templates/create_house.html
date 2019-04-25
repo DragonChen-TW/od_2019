@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<title>Create House</title>
+	</head>
+	<body>
+		<form action="" method="post">
+			{% csrf_token %}
+
+  			<h3>新增房屋</h3>
+			名稱：<input type="text" name="name" value=""><br>
+  			經度（Lng）：<input type="number" step="any" name="lng" value=""><br>
+  			緯度（Lat）：<input type="number" step="any" name="lat" value=""><br>
+
+  			屋齡：<input type="number" name="age"><br>
+  			Price: <input type="number" value="0" step="any" name="price"><br>
+  			Address: <input type="text" step="any" name="address"><br>
+			種類：<select name="type">
+  				<option value="公寓" selected>公寓</option>
+  				<option value="獨棟住宅">獨棟住宅</option>
+  			</select><br>
+
+			<input type="checkbox" name="is_near_park" checked>是否鄰近公園<br>
+
+	      	<input type="submit" name="" value="Submit">
+        </form>
+	</body>
+</html>

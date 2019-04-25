@@ -10,7 +10,8 @@ from .forms import UserForm, UserCreationForm, LoginForm
 # Create your views here.
 class Index(View):
     def get(self, request):
-        return HttpResponse('<h2>Index in user</h2>')
+        # return HttpResponse('<h2>Index in user</h2>')
+        return render(request, 'user_index.html')
 
 class UserSelf(View):
     def get(self, request):
@@ -23,10 +24,10 @@ class UserLogin(FormView):
     template_name = 'login.html'
     success_url = '/user/self/'
 
-    def dispatch(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
-            return redirect('/login/')
-        return super().dispatch(request,*args, **kwargs)
+    # def dispatch(self, request, *args, **kwargs):
+    #     if request.user.is_authenticated:
+    #         return redirect('/user/login/')
+    #     return super().dispatch(request,*args, **kwargs)
 
     def form_valid(self, form):
         self.request.session.set_expiry(43200) # 12 hours

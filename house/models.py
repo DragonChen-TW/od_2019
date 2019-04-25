@@ -4,8 +4,8 @@ from django.db import models
 class House(models.Model):
     # Name
     name = models.CharField(max_length=10)
-    lat = models.FloatField()
     lng = models.FloatField()
+    lat = models.FloatField()
 
     # Basic
     age = models.IntegerField(blank=True)
