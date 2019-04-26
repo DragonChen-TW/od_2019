@@ -2,6 +2,7 @@ from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth.decorators import login_required
 from django.views import View
 from django.http import JsonResponse
+import json
 #
 from .models import House
 
@@ -11,6 +12,12 @@ class HouseListView(View):
         houses = list(House.objects.values())
 
         return JsonResponse(houses, safe=False)
+def HouseMapView(request):
+    houses = list(House.objects.values())
+    houses_json = json.dumps(houses, ensure_ascii=False)
+    print(houses_json)
+
+    return render(request, 'map.html', {'houses': houses_json})
 
 class CreateHouseView(View):
     def get(self, request):
