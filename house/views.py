@@ -15,16 +15,13 @@ class HouseListView(View):
 def HouseMapView(request):
     houses = list(House.objects.values())
     houses_json = json.dumps(houses, ensure_ascii=False)
-    print(houses_json)
+    # print(houses_json)
 
     return render(request, 'map.html', {'houses': houses_json})
 
 class CreateHouseView(View):
     def get(self, request):
-        if not request.user.is_admin:
-            return render(request, 'not_admin.html')
-        else:
-            return render(request, 'create_house.html')
+        return render(request, 'create_house.html')
     def post(self, request):
         house_d = dict(request.POST)
         # print(house)
