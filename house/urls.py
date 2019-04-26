@@ -4,6 +4,6 @@ from .views import HouseListView, CreateHouseView, HouseMapView
 
 urlpatterns = [
     path('', HouseListView.as_view()),
-    path('map', HouseMapView),
+    path('map/', HouseMapView),
     path('create/', CreateHouseView.as_view()),
 ]
