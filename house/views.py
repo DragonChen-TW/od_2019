@@ -3,6 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.views import View
 from django.http import JsonResponse
 import json
+import os
+import pandas as pd
 #
 from .models import House
 
@@ -39,25 +41,3 @@ class CreateHouseView(View):
         House.objects.create(**house)
 
         return redirect('/house/')
-
-# class AddStoreView(View):
-#     def get(self, request):
-#         return render(request, 'add_store.html')
-#     def post(self, request):
-#         store = request.POST
-#         store = dict(store)
-#
-#         new_id = Store.objects.order_by('-id').first()
-#         if not new_id:
-#             new_id = 1
-#         else:
-#             new_id = new_id.id + 1
-#
-#         Store.objects.get_or_create(id=new_id,
-#         name=store['name'][0],address=store['address'][0],
-#         phone=store['phone'][0],type=store['type'][0],url=store['url'][0],
-#         close_date=store['close_date'][0],open_duration=store['open_duration'][0])
-#
-#         # Store.objects.get_or_create(**store)
-#
-#         return redirect('/back/')
