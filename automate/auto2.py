@@ -27,15 +27,12 @@ res = driver.find_element_by_class_name('PointStatInfoBox_STUnitBts')
 tds = res.find_elements_by_tag_name('td')
 
 
-# i = 0
-# while True:
-#     time.sleep(1)
-#     print(i)
-#     print(tds[1].text)
-#     if tds[1].text != "讀取中...":
-#         print("Done!")
-#         break
-#     i += 1
+while True:
+    print('Loading')
+    time.sleep(1)
+    if tds[1].text != "讀取中...":
+        print("Done!")
+        break
 
 
 keys = ['county','town','village','code2','code1','codebase']
