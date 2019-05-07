@@ -3,8 +3,9 @@ from django.urls import path
 from .views import HouseListView, CreateHouseView, HouseMapView
 
 urlpatterns = [
-    path('', HouseListView.as_view()),
+    path('', HouseMapView),
     path('map/', HouseMapView),
     path('create/', CreateHouseView.as_view()),
-    # path('calculate/', CalculateView)
+    path('json/', HouseListView.as_view()),
+    # path('calculate/', CalculateView),
 ]

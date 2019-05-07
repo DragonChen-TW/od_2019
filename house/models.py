@@ -13,5 +13,8 @@ class House(models.Model):
     address = models.CharField(max_length=100, blank=True)
     type = models.CharField(max_length=100, blank=True)
 
+    # Pre Calculated
+    stat_code = models.CharField(max_length=20, default='')
+
     # Dynamic
     is_near_park = models.BooleanField(default=1)
