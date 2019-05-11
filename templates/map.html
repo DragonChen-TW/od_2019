@@ -21,7 +21,7 @@
 
 <script>
     var map;
-    map = L.map('map').setView([22.62,120.27], 16);
+    map = L.map('map').setView([22.621,120.273], 15.5);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '<a href="https://www.openstreetmap.org/">OSM</a>',
@@ -32,8 +32,6 @@
     /* Marker */
     // get json inside django
     var houses = JSON.parse('{{houses | safe}}');
-    // get json outside django using ajax
-    // pass
 
     // draw
     for (const h of houses) {  // iter each elements of houses

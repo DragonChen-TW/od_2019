@@ -7,6 +7,7 @@ import os
 import pandas as pd
 #
 from .models import House
+from .auto import get_stat_code
 
 # Create your views here.
 class HouseListView(View):
@@ -26,17 +27,17 @@ class CreateHouseView(View):
         return render(request, 'create_house.html')
     def post(self, request):
         house_d = dict(request.POST)
-        # print(house)
-        fields = ['name', 'lng', 'lat',  'age', 'price', 'address', 'type']
+        # make house
+        fields = ['name', 'age', 'address', 'type']
         house = {k: house_d[k][0] for k in fields if house_d.get(k)}
         floats = ['lng', 'lat'  ,'price']
         for f in floats:
-            house[f] = float(house[f])
+            house[f] = float(house_d[f][0])
 
-        if house_d.get('is_near_park'):
-            house['is_near_park'] = True
-        else:
-            house['is_near_park'] = False
+        # get stat_code
+        res = get_stat_code(house['lng'], house['lat'])
+        house['stat_code'] = res['最小']
+        house['raw_stat'] = json.dumps(res)
 
         House.objects.create(**house)
 
