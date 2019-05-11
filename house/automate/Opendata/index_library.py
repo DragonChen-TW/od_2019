@@ -171,8 +171,8 @@ def calPoliceIndex(lng,lat):
 def search(lng, lat):
     stat_code = 'A6401-0025-00'
 
-    lng = 120.259825
-    lat = 22.6173789
+    # lng = 120.259825
+    # lat = 22.6173789
 
     medical_score = calMedicalIndex(stat_code)
     # print("醫療分數: {}\n".format(medical_score))

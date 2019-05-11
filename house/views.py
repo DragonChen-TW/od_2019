@@ -23,6 +23,15 @@ def HouseMapView(request):
 
     return render(request, 'map.html', {'houses': houses_json})
 
+def ChartView(request):
+    house_id = request.GET.get('house_id', 1)
+    house = House.objects.get(id=house_id)
+
+    fields = ['medical_score', 'freeway_score', 'mrt_score', 'light_rail_score', 'police_score']
+    res = [house.__dict__[f] for f in fields] + [0]
+
+    return render(request, 'chart.html', {'json_data':res})
+
 def searchHouseView(request):
     id = request.GET.get('house_id', 1)
     house = House.objects.get(id=id)
