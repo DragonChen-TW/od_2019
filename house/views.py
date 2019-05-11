@@ -8,6 +8,7 @@ import pandas as pd
 #
 from .models import House
 from .auto import get_stat_code
+from .automate.Opendata.index_library import search
 
 # Create your views here.
 class HouseListView(View):
@@ -21,6 +22,18 @@ def HouseMapView(request):
     # print(houses_json)
 
     return render(request, 'map.html', {'houses': houses_json})
+
+def searchHouseView(request):
+    id = request.GET.get('house_id', 1)
+    house = House.objects.get(id=id)
+
+    res = search(house.lng, house.lat)
+    for k in res:
+        house.__dict__[k] = res[k]
+
+    house.save()
+
+    return redirect('/house/')
 
 class CreateHouseView(View):
     def get(self, request):

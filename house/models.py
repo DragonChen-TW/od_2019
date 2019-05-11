@@ -17,5 +17,12 @@ class House(models.Model):
     stat_code = models.CharField(max_length=20, default='')
     raw_stat = models.CharField(max_length=200, default='')
 
+    # Scores
+    medical_score = models.IntegerField(default=-1)
+    freeway_score = models.IntegerField(default=-1)
+    mrt_score = models.IntegerField(default=-1)
+    light_rail_score = models.IntegerField(default=-1)
+    police_score = models.IntegerField(default=-1)
+
     # Dynamic
     is_near_park = models.BooleanField(default=1)
