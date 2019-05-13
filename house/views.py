@@ -33,14 +33,15 @@ def ChartView(request):
     return render(request, 'chart.html', {'json_data':res})
 
 def searchHouseView(request):
-    id = request.GET.get('house_id', 1)
-    house = House.objects.get(id=id)
+    # if request.GET.get('search_all') and request.GET['search_all']:
+    houses = House.objects.all()
 
-    res = search(house.lng, house.lat)
-    for k in res:
-        house.__dict__[k] = res[k]
+    for house in houses:
+        res = search(house.lng, house.lat)
+        for k in res:
+            house.__dict__[k] = res[k]
 
-    house.save()
+        house.save()
 
     return redirect('/house/')
 
@@ -73,3 +74,12 @@ class CreateHouseView(View):
         House.objects.create(**house)
 
         return redirect('/house/')
+
+# rehomes
+def aboutView(request):
+    return render(request, 'about.html')
+def agentView(request):
+    return render(request, 'agent.html')
+def propertiesView(request, h_id):
+    house = House.objects.get(id=h_id)
+    return render(request, 'properties.html', {'house': house})

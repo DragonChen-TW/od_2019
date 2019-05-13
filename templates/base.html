@@ -3,61 +3,213 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
-        <!-- <meta name="csrf-token" content="{% csrf_token %}"> -->
-        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, shrink-to-fit=no">
-        <title>OD 2019</title>
-        <link rel="stylesheet" href="{% static 'css\bootstrap.min.css' %}">
+        <meta charset="UTF-8">
+        <meta name="description" content="">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <style media="screen">
-            body{
-                font-family: '微軟正黑體';
-            }
-        </style>
+        <!-- Title -->
+        <title>Rehomes - Real Estate HTML Template</title>
+
+        <!-- Favicon -->
+        <!-- <link rel="icon" href="./img/core-img/favicon.png"> -->
+        <link rel="icon" href="{% static 'new/img/core-img/favicon.png' %}">
+
+        <!-- Stylesheet -->
+        <!-- <link rel="stylesheet" href="style.css"> -->
+        <link rel="stylesheet" href="{% static 'new/style.css' %}">
 
         {% block style %}
         {% endblock %}
 
     </head>
     <body>
-        <div class="container">
-            <nav class="navbar navbar-expand-sm navbar-dark bg-secondary">
-                <a class="navbar-brand" href="#">屋託邦</a>
-
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/house/list/">房屋清單</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/house/create/">新增房屋</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/house/map/">地圖</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">指數比較</a>
-                    </li>
-                </ul>
-
-                <div class="ml-auto">
-                    {% if request.user.is_authenticated %}
-                        <span class="text-white navbar-text">Hello, {{ request.user.name }}</span>
-                        <a href="{% url 'logout' %}"><button class="btn btn-dark">登出</button></a>
-                    {% else %}
-                        <a href="{% url 'login' %}"><button class="btn btn-dark navbar-btn">登入</button></a>
-                    {% endif %}
-                </div>
-            </nav>
-
-
-
-            {% block content %}
-            {% endblock %}
+        <!-- Preloader -->
+        <div id="preloader">
+            <!-- <div class="loader"></div> -->
         </div>
 
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <!-- **** Header Area Start **** -->
+        <header class="header-area">
+            <!-- Top Header Area Start -->
+            <!-- <div class="top-header-area">
+                <div class="container h-100">
+                    <div class="row h-100 align-items-center">
+                        <div class="col-6">
+                            <div class="top-header-content">
+                                <a href="#"><i class="icon_mail"></i> <span>info.colorlib@gmail.com</span></a>
+                                <a href="#"><i class="icon_phone"></i> <span>(12) 345 6789</span></a>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="top-header-content">
+                                <div class="top-social-area ml-auto">
+                                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                    <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                    <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                                    <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <!-- Top Header Area End -->
+
+            <!-- Main Header Start -->
+            <div class="main-header-area animated">
+                <div class="classy-nav-container breakpoint-off">
+                    <div class="container">
+                        <!-- Classy Menu -->
+                        <nav class="classy-navbar justify-content-between" id="rehomesNav">
+
+                            <!-- Logo -->
+                            <a class="nav-brand" href="/house/"><img src="{% static 'new/img/core-img/logo2.png'%}" alt=""></a>
+
+                            <!-- Navbar Toggler -->
+                            <div class="classy-navbar-toggler">
+                                <span class="navbarToggler"><span></span><span></span><span></span></span>
+                            </div>
+
+                            <!-- Menu -->
+                            <div class="classy-menu">
+                                <!-- Menu Close Button -->
+                                <div class="classycloseIcon">
+                                    <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                                </div>
+                                <!-- Nav Start -->
+                                <div class="classynav">
+                                    <ul id="nav">
+                                        <li><a href="/house/">Home</a></li>
+                                        <li><a href="/house/properties/">Properties</a></li>
+                                        <li><a href="#">Comparison</a></li>
+                                        <li><a href="#">Rent</a></li>
+                                        <li><a href="/house/agent/">Agents</a></li>
+                                        <li><a href="/house/about/">About</a></li>
+                                    </ul>
+
+                                    <!-- Contact btn -->
+                                    <div class="contact-btn mt-3 mt-lg-0 ml-3 ml-lg-5">
+                                        <a href="#">Contact Us</a>
+                                    </div>
+                                </div>
+                                <!-- Nav End -->
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- **** Header Area End **** -->
+
+        {% block content %}
+        {% endblock %}
+
+
+
+        <!-- **** Footer Area Start **** -->
+        <footer class="footer-area bg-img bg-overlay-2 section-padding-100-0" style="background-image: url(img/bg-img/17.jpg);">
+            <!-- Main Footer Area -->
+            <div class="main-footer-area">
+                <div class="container">
+                    <div class="row justify-content-between">
+
+                        <!-- Footer Widget Area -->
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <div class="single-footer-widget mb-80">
+                                <!-- Footer Logo -->
+                                <a href="#" class="footer-logo"><img src="{% static 'new/img/core-img/logo2.png'%}" alt=""></a>
+
+                                <p>屋託邦是一個評估房屋價值的網站</p>
+                                <!-- Social Info -->
+                                <div class="social-info">
+                                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                    <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                    <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                                    <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- Footer Widget Area -->
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <div class="single-footer-widget mb-80">
+                                <!-- Widget Title -->
+                                <h5 class="widget-title">Property Cities</h5>
+
+                                <!-- Footer Nav -->
+                                <ul class="footer-nav d-flex flex-wrap">
+                                    <li><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i> Kalima</a></li>
+                                    <li><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i> Austin</a></li>
+                                    <li><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i> Mianma</a></li>
+                                    <li><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i> Mahatan</a></li>
+                                    <li><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i> Chicago</a></li>
+                                    <li><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i> Mehico</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Footer Widget Area -->
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <div class="single-footer-widget mb-80">
+                                <!-- Widget Title -->
+                                <h5 class="widget-title">Newsletter</h5>
+
+                                <p>Subscribe our newsletter gor get notification about new updates, count, etc.</p>
+                                <!-- Newsletter Form -->
+                                <form action="index.html" class="nl-form">
+                                    <input type="email" name="nl-email" class="form-control" placeholder="Enter your email...">
+                                    <button type="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Copywrite Area -->
+            <div class="copywrite-content">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <!-- Copywrite Text -->
+                        <div class="col-12 col-sm-6">
+                            <div class="copywrite-text">
+                                <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->Copyright &copy; 2019 All rights reserved | Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                            </div>
+                        </div>
+
+                        <!-- Footer Menu -->
+                        <div class="col-12 col-sm-6">
+                            <div class="footer-menu">
+                                <ul class="nav">
+                                    <li><a href="/house/">Home</a></li>
+                                    <li><a href="#">Properties</a></li>
+                                    <li><a href="#">Comparison</a></li>
+                                    <li><a href="#">Rent</a></li>
+                                    <li><a href="/house/agent/">Agents</a></li>
+                                    <li><a href="/house/about/">About</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- **** Footer Area End **** -->
+
+        <!-- Scripts -->
+        <!-- **** All JS Files ***** -->
+        <!-- jQuery 2.2.4 -->
+        <script src="{% static 'new/js/jquery.min.js' %}"></script>
+        <!-- Popper -->
+        <script src="{% static 'new/js/popper.min.js' %}"></script>
+        <!-- Bootstrap -->
+        <script src="{% static 'new/js/bootstrap.min.js' %}"></script>
+        <!-- All Plugins -->
+        <script src="{% static 'new/js/rehomes.bundle.js' %}"></script>
+        <!-- Active -->
+        <script src="{% static 'new/js/default-assets/active.js' %}"></script>
 
         {% block script %}
         {% endblock %}

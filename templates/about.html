@@ -1,0 +1,180 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- **** Breadcrumb Area Start **** -->
+    <div class="breadcrumb-area bg-img bg-overlay-3 wow fadeInUp" data-wow-delay="200ms" style="background-image: url(img/bg-img/30.jpg);">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="breadcrumb-content">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">About</li>
+                            </ol>
+                        </nav>
+                        <h2 class="page-title">About Us</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- **** Breadcrumb Area End **** -->
+
+    <!-- **** About Us Area Start **** -->
+    <section class="about-us-area section-padding-100-60">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="about-us-title mb-40 wow fadeInUp" data-wow-delay="200ms">
+                        <h2>Hello! Welcome to Re<span>home.</span></h2>
+                      <p> 對於有租屋/購屋需求的一般民眾而言，房仲網站大多沒有一個有效的推薦系統，且常有資訊不對稱問題。因此我
+                          們想統合政府所提供的地價、實價登錄資料以及所有待租售物件周圍的生活機能資料，製成房屋機能趨勢圖表，用
+                          視覺化的方式呈現資料。使用者能輸入個人資料獲得客製化的推薦與房屋綜合機能評分，方便快速地找到最符合
+                          需求且性價比最高的物件，本服務也提供政策與未來房價趨勢預測等功能予使用者參考。除了一般民眾之外，廠商
+                          可評估要進駐哪些縣市並發展相關產業，為該地區帶來經濟效益；政府也能以查看地圖內各項公共設施、公家機關
+                          與醫療院所之分布地點，結合民眾在房市上的交易熱度，作為未來規畫市政之依據。</p>
+                    </div>
+                </div>
+
+                <!-- Single About Area -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="single-about-content wow fadeInUp" data-wow-delay="200ms">
+                        <!-- Thumb -->
+                        <div class="single-about-thumb">
+                            <img src="{% static 'new/img/bg-img/31.jpg' %}" alt="">
+                        </div>
+                        <h4>Our Company</h4>
+                        <p>Donec enim ipsum porta justo integer at velna vitae auctor integer congue magna at risus auctor purus unt pretium ligula rutrum integer sapien ultrice ligula luctus undo magna risus</p>
+                    </div>
+                </div>
+
+                <!-- Single About Area -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="single-about-content wow fadeInUp" data-wow-delay="200ms">
+                        <!-- Thumb -->
+                        <div class="single-about-thumb">
+                            <img src="{% static 'new/img/bg-img/32.jpg' %}" alt="">
+                        </div>
+                        <h4>Our Vision</h4>
+                        <p>Donec enim ipsum porta justo integer at velna vitae auctor integer congue magna at risus auctor purus unt pretium ligula rutrum integer sapien ultrice ligula luctus undo magna risus</p>
+                    </div>
+                </div>
+
+                <!-- Single About Area -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="single-about-content wow fadeInUp" data-wow-delay="200ms">
+                        <!-- Thumb -->
+                        <div class="single-about-thumb">
+                            <img src="{% static 'new/img/bg-img/33.jpg' %}" alt="">
+                        </div>
+                        <h4>Our Quality</h4>
+                        <p>Donec enim ipsum porta justo integer at velna vitae auctor integer congue magna at risus auctor purus unt pretium ligula rutrum integer sapien ultrice ligula luctus undo magna risus</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- **** About Us Area End **** -->
+
+
+    <!-- **** Choose Us Area Start **** -->
+    <section class="rehomes-choose-us-area section-padding-100-60">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading text-center wow fadeInUp" data-wow-delay="200ms">
+                        <h2><span>Why</span> Choose Us?</h2>
+                        <p>We have over 8 years of experience and knowledge on how to sell more.</p>
+                    </div>
+                </div>
+
+                <!-- Single choose us content -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="single-choose-us-content wow fadeInUp" data-wow-delay="200ms">
+                        <!-- Choose us Icon -->
+                        <div class="choose-us-icon">
+                            <i class="icon_search"></i>
+                        </div>
+                        <h5>物件即時查詢</h5>
+                        <p>不同於房仲網站只能使用區域、價格等傳統查詢條件搜尋待租售物件，我們利用所蒐集的資料提供更多元、完善的物件查詢功能，例如治安、醫療、綠地，盡可能滿足用戶對生活機能的需求。</p>
+                    </div>
+                </div>
+
+                <!-- Single choose us content -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="single-choose-us-content wow fadeInUp" data-wow-delay="200ms">
+                        <!-- Choose us Icon -->
+                        <div class="choose-us-icon">
+                            <i class="icon_building"></i>
+                        </div>
+                        <h5>綜合機能評估</h5>
+                        <p>綜合房地價與生活機能資訊，替待租售物件評估出一組機能數字，清楚地將使用者對房市的需求量化，使用戶的置產經費能夠產生最大利益，尋得最符合需求及預算的物件。</p>
+                    </div>
+                </div>
+
+                <!-- Single choose us content -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="single-choose-us-content wow fadeInUp" data-wow-delay="200ms">
+                        <!-- Choose us Icon -->
+                        <div class="choose-us-icon">
+                            <i class="icon_contacts"></i>
+                        </div>
+                        <h5>個人化推薦</h5>
+                        <p>蒐集使用者對於租/購屋的需求及個人資訊，例如薪資、存款、公司學校地點、可接受之通勤距離、是否育子及個人生涯規劃，結合上述房屋綜合機能，提供個人化的推薦，讓用戶能更有效的找到自己適合的房屋。</p>
+                    </div>
+                </div>
+
+                <!-- Single choose us content -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="single-choose-us-content wow fadeInUp" data-wow-delay="200ms">
+                        <!-- Choose us Icon -->
+                        <div class="choose-us-icon">
+                            <i class="icon_folder_upload"></i>
+                        </div>
+                        <h5>更新推播通知</h5>
+                        <p>系統會定期更新資料集內容與網路數據，透過即時推播通知用戶，省去使用者需要自行收集資訊的時間成本。</p>
+                    </div>
+                </div>
+
+                <!-- Single choose us content -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="single-choose-us-content wow fadeInUp" data-wow-delay="200ms">
+                        <!-- Choose us Icon -->
+                        <div class="choose-us-icon">
+                            <i class="icon_piechart"></i>
+                        </div>
+                        <h5>房屋機能趨勢圖</h5>
+                        <p>利用收集之資料集與網路數據彙整成多樣圖表，以時間序列化的方式呈現給用戶關於該區域或條件下的房屋綜合機能趨勢，同時考慮政策及未來走勢的預測，使用戶能做更精準的購屋決策。</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- **** Choose Us Area End **** -->
+
+    <!-- **** Partner Area Start **** -->
+    <div class="partner-area wow fadeInUp" data-wow-delay="200ms">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="partner-logo-slide owl-carousel">
+                        <!-- Single Partner Logo -->
+                        <a href="#" class="partner-logo wow fadeInUp" data-wow-delay="100ms"><img src="{% static 'new/img/core-img/1.png' %}" alt=""></a>
+                        <!-- Single Partner Logo -->
+                        <a href="#" class="partner-logo wow fadeInUp" data-wow-delay="300ms"><img src="{% static 'new/img/core-img/2.png' %}" alt=""></a>
+                        <!-- Single Partner Logo -->
+                        <a href="#" class="partner-logo wow fadeInUp" data-wow-delay="500ms"><img src="{% static 'new/img/core-img/3.png' %}" alt=""></a>
+                        <!-- Single Partner Logo -->
+                        <a href="#" class="partner-logo wow fadeInUp" data-wow-delay="700ms"><img src="{% static 'new/img/core-img/4.png' %}" alt=""></a>
+                        <!-- Single Partner Logo -->
+                        <a href="#" class="partner-logo wow fadeInUp" data-wow-delay="900ms"><img src="{% static 'new/img/core-img/5.png' %}" alt=""></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- **** Partner Area End **** -->
+{% endblock %}

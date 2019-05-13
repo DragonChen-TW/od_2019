@@ -1,7 +1,18 @@
 import pandas as pd
 import math as m
 
-data_folder = 'static/css/od'
+data_folder = 'static/csv/od/'
+
+def calculate_distance(lng1, lat1, lng2, lat2):
+    # 將十進制度數轉化為弧度
+    lng1, lat1, lng2, lat2 = map(m.radians, [lng1, lat1, lng2, lat2])
+    # haversine公式
+    dlng = lng2 - lng1
+    dlat = lat2 - lat1
+    a = m.sin(dlat/2)**2 + m.cos(lat1) * m.cos(lat2) * m.sin(dlng/2)**2
+    c = 2 * m.asin(m.sqrt(a))
+    r = 6371 # 地球平均半徑，單位為公里
+    return c * r * 1000
 
 def calMedicalIndex(codebase):
     dir = data_folder + 'medical_data.csv'
@@ -36,17 +47,6 @@ def calMedicalIndex(codebase):
         medical_score += 2
 
     return medical_score
-
-def calculate_distance(lng1, lat1, lng2, lat2):
-    # 將十進制度數轉化為弧度
-    lng1, lat1, lng2, lat2 = map(m.radians, [lng1, lat1, lng2, lat2])
-    # haversine公式
-    dlng = lng2 - lng1
-    dlat = lat2 - lat1
-    a = m.sin(dlat/2)**2 + m.cos(lat1) * m.cos(lat2) * m.sin(dlng/2)**2
-    c = 2 * m.asin(m.sqrt(a))
-    r = 6371 # 地球平均半徑，單位為公里
-    return c * r * 1000
 
 def calFreewayIndex(lng,lat):
     min_distance = 9999999999
