@@ -44,6 +44,15 @@ def searchHouseView(request):
 
     return redirect('/house/')
 
+def updateStatView(request):
+    for house in House.objects.all():
+        if house.stat_code == '':
+            res = get_stat_code(house['lng'], house['lat'])
+            house['stat_code'] = res['最小']
+            house['raw_stat'] = json.dumps(res)
+
+    return redirect('/house/')
+
 class CreateHouseView(View):
     def get(self, request):
         return render(request, 'create_house.html')
