@@ -1,7 +1,8 @@
 import pandas as pd
 import math as m
+import csv
 
-data_folder = 'static/csv/od/'
+data_folder = ''
 
 def calMedicalIndex(codebase):
     dir = data_folder + 'medical_data.csv'
@@ -14,11 +15,9 @@ def calMedicalIndex(codebase):
         medical_score += 1000
     elif result['H_CNT'].values >= 4:
         medical_score += 500
-    elif result['H_CNT'].values >= 2:
-        medical_score += 400
     elif result['H_CNT'].values >= 1:
         medical_score += 250
-
+    
     #平均每千人擁有病床數 每個級距加乘20%點數
     if result['H_SRVB'].values >= 2000:
         medical_score += 400
@@ -36,7 +35,7 @@ def calMedicalIndex(codebase):
         medical_score += 10
     elif result['H_SRVB'].values >= 10:
         medical_score += 2
-
+        
     return medical_score
 
 def calculate_distance(lng1, lat1, lng2, lat2):
@@ -54,19 +53,19 @@ def calFreewayIndex(lng,lat):
     min_distance = 9999999999
     freeway_score = 0
     freeway_exit_name = ''
-
+    
     dir = data_folder + 'freeway_data.csv'
     freeway = pd.read_csv(dir,encoding = "utf-8")
-
+    
     for i in range(len(freeway)):
         dist = calculate_distance(lng,lat,freeway['Lng'][i],freeway['Lat'][i])
         if dist < min_distance:
             min_distance = dist
             freeway_exit_name = freeway['Name'][i]
-
+        
         #print(freeway['Name'][i],dist)
     print("\n最近交流道: {} --> {}(m)\n".format(freeway_exit_name,min_distance))
-
+    
     #以KM設定分數
     if min_distance >= 100000:
         freeway_score = 0
@@ -80,17 +79,17 @@ def calFreewayIndex(lng,lat):
         freeway_score = min_distance / 2000 * 200 + 500
     else:
         freeway_score = min_distance / 1000 * 300 + 700
-
+        
     return freeway_score
 
 def calMRTIndex(lng,lat):
     min_distance = 9999999999
     mrt_score = 0
     station_name = ''
-
+    
     dir = data_folder + 'mrt_station_data.csv'
     mrt = pd.read_csv(dir,encoding = "utf-8")
-
+    
     for i in range(len(mrt)):
         dist = calculate_distance(lng,lat,mrt['車站經度'][i],mrt['車站緯度'][i])
         if dist < min_distance:
@@ -98,7 +97,7 @@ def calMRTIndex(lng,lat):
             station_name = mrt['車站中文名稱'][i]
         #print(mrt['車站中文名稱'][i],dist)
     print("\n最近捷運站: {} --> {}(m)\n".format(station_name,min_distance))
-
+    
     #以KM設定分數
     if min_distance >= 100000:
         mrt_score = 0
@@ -112,17 +111,17 @@ def calMRTIndex(lng,lat):
         mrt_score = min_distance / 2000 * 200 + 500
     else:
         mrt_score = min_distance / 1000 * 300 + 700
-
+        
     return mrt_score
 
 def calLightRailIndex(lng,lat):
     min_distance = 9999999999
     light_rail_score = 0
     station_name = ''
-
+    
     dir = data_folder + 'light_rail_station_data.csv'
     light_rail = pd.read_csv(dir,encoding = "utf-8")
-
+    
     for i in range(len(light_rail)):
         dist = calculate_distance(lng,lat,light_rail['車站經度'][i],light_rail['車站緯度'][i])
         if dist < min_distance:
@@ -130,7 +129,7 @@ def calLightRailIndex(lng,lat):
             station_name = light_rail['車站中文名稱'][i]
         #print(mrt['車站中文名稱'][i],dist)
     print("\n最近輕軌站: {} --> {}(m)\n".format(station_name,min_distance))
-
+    
     #以KM設定分數，輕軌站分數是捷運站一半
     if min_distance >= 100000:
         light_rail_score = 0
@@ -144,7 +143,7 @@ def calLightRailIndex(lng,lat):
         light_rail_score = min_distance / 2000 * 100 + 250
     else:
         light_rail_score = min_distance / 1000 * 150 + 350
-
+        
     return light_rail_score
 
 def calTrafficIndex(lng, lat):
@@ -155,10 +154,10 @@ def calPoliceIndex(lng,lat):
     min_distance = 9999999999
     police_score = 0
     police_station = ''
-
+    
     dir = data_folder + 'police_result_data.csv'
     police_result_data = pd.read_csv(dir,encoding = "big5")
-
+    
     for i in range(len(police_result_data)):
         dist = calculate_distance(lng,lat,police_result_data['Lng'][i],police_result_data['Lat'][i])
         if dist < min_distance:
@@ -166,7 +165,7 @@ def calPoliceIndex(lng,lat):
             police_station = police_result_data['中文單位名稱'][i]
         #print(mrt['車站中文名稱'][i],dist)
     print("\n最近警察局: {} --> {}(m)\n".format(police_station,min_distance))
-
+    
     if min_distance >= 100000:
         police_score = 0
     elif min_distance >= 7000:
@@ -179,15 +178,15 @@ def calPoliceIndex(lng,lat):
         police_score = min_distance / 2000 * 200 + 500
     else:
         police_score = min_distance / 1000 * 300 + 700
-
+        
     return police_score
 
 def calStudentPopulationIndex(CODEBASE):
     dir = data_folder + 'student_population.csv'
     student_population = pd.read_csv(dir,encoding = "big5")
-
+    
     result = student_population[student_population['CODEBASE']==CODEBASE]
-
+    
     people_student = result['A5A9_CNT']+result['A10A14_CNT']+result['A15A19_CNT']
     people_total = 0
     people_total += result.iloc[:,3:-1].sum(axis=1)
@@ -205,18 +204,56 @@ def calStudentPopulationIndexAll():
     #將比例調整為100%，依比例設定分數，共有10000分
     return ratio*5*1000
 
+def search(lng, lat):
+    stat_code = 'A6401-0025-00'
+
+    medical_score = calMedicalIndex(stat_code)
+    print("醫療分數: {}\n".format(medical_score))
+
+    freeway_score = calFreewayIndex(lng,lat)
+    print("高速公路分數: {}".format(freeway_score))
+
+    mrt_score = calMRTIndex(lng,lat)
+    print("捷運站分數: {}".format(mrt_score))
+
+    light_rail_score = calLightRailIndex(lng,lat)
+    print("輕軌站分數: {}".format(light_rail_score))
+    
+    total_traffic_score = calTrafficIndex(lng,lat)
+    print("交通整體分數: {}".format(total_traffic_score))
+
+    police_score = calPoliceIndex(lng,lat)
+    print("警察局分數: {}".format(police_score))
+    
+#    population_score = calStudentPopulationIndex(stat_code)
+#    print("5-19歲學齡人口占比分數: {}\n".format(population_score))
+#
+#    all_population_score = calStudentPopulationIndexAll()
+#    print(all_population_score.describe())
+
+    return {
+        'medical_score': medical_score,
+        'freeway_score': freeway_score,
+        'mrt_score': mrt_score,
+        'light_rail_score': light_rail_score,
+        'police_score': police_score,
+#        'population_score': population_score
+    }
+    
 def getHistoryHouseTransInfo(Lng,Lat,category,district):
     data1 = data_folder + 'home_transaction_data.csv'
+    #data2 = data_folder + 'home_trans_wgs.csv'
     home_transaction = pd.read_csv(data1,encoding = "utf-8")
-
-    house_type = home_transaction[home_transaction['建物型態'] == category]
-    result = house_type[home_transaction['鄉鎮市區'] == district]
+    #home_wgs = pd.read_csv(data2,encoding = "utf-8")
+    
+    house_type = home_transaction[home_transaction['建物型態']==category]
+    result = house_type[home_transaction['鄉鎮市區']==district]
     total = result['總價元'].astype(int)
     unitprice = result['單價元平方公尺'].astype(int)
-
+    
     total_price = total.sum()/len(result)
     price_per_unit = (unitprice*3.305).sum()/len(result)
-
+    
     sale_condition = ''
     if len(result) > 400:
         sale_condition = '搶手地段'
@@ -226,7 +263,12 @@ def getHistoryHouseTransInfo(Lng,Lat,category,district):
         sale_condition = '前景看好'
     else:
         sale_condition = '普通'
-
+    
+    print("上季平均成交總價: {}".format(total_price))
+    print("上季平均成交單價(元/坪): {}".format(price_per_unit))
+    print("上季同物件成交件數: {}".format(len(result)))
+    print("上季成交行情: {}".format(sale_condition))
+    #return result
     return {
         'district': district,
         'total_price': total_price,
@@ -234,34 +276,7 @@ def getHistoryHouseTransInfo(Lng,Lat,category,district):
         'sale_count': len(result),
         'sale_condition': sale_condition
     }
-
-def search(lng=120.259825, lat=22.6173789, stat_code='A6401-0025-00'):
-    # stat_code = 'A6401-0025-00'
-    medical_score = calMedicalIndex(stat_code)
-    # print("醫療分數: {}\n".format(medical_score))
-
-    freeway_score = calFreewayIndex(lng,lat)
-    # print("高速公路分數: {}".format(freeway_score))
-
-    mrt_score = calMRTIndex(lng,lat)
-    # print("捷運站分數: {}".format(mrt_score))
-
-    light_rail_score = calLightRailIndex(lng,lat)
-    # print("輕軌站分數: {}".format(light_rail_score))
-
-    police_score = calPoliceIndex(lng,lat)
-    # print("警察局分數: {}".format(police_score))
-
-    population_score = calStudentPopulationIndex(stat_code)
-    # print("5-19歲學齡人口占比分數: {}\n".format(population_score))
-
-
-
-    return {
-        'medical_score': medical_score,
-        'freeway_score': freeway_score,
-        'mrt_score': mrt_score,
-        'light_rail_score': light_rail_score,
-        'police_score': police_score,
-        'population_score': population_score
-    }
+    
+#search(120.259825,22.6173789)
+detail_info = getHistoryHouseTransInfo(120.259825,22.6173789,'住宅大樓(11層含以上有電梯)','苓雅區')
+print(detail_info)

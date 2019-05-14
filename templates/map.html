@@ -39,7 +39,8 @@
         var houses = JSON.parse('{{houses | safe}}');
 
         var mark_f = function(e){
-            myChart.data.datasets[0].data = [200, 500, 100, 800, 300];
+            console.log(e.target.data);
+            myChart.data.datasets[0].data = e.target.data;
             myChart.update();
         }
 
@@ -51,7 +52,7 @@
             marker.addTo(map);
             marker.bindPopup(h['name'] + ' <a href="/house/properties/'+h.id+'/">more</a>');
 
-            marker.index = i;
+            marker.data = [h.medical_score, h.freeway_score, h.traffic_score, h.police_score, h.population_score];
             marker.addEventListener('click', mark_f);
         }
     </script>
@@ -61,9 +62,9 @@
 		var myChart = new Chart(ctx, {
 		    type: 'horizontalBar',
 		    data: {
-		        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple'],
+		        labels: ['醫療', '高速公路', '大眾運輸', '治安', '教育'],
 		        datasets: [{
-		            label: '# of Votes',
+		            label: '指數',
 		            data: [],
 		            backgroundColor: [
 		                'rgba(255, 99, 132, 0.2)',
@@ -89,10 +90,16 @@
 		                ticks: {
 		                    beginAtZero: true
 		                }
+		            }],
+                    xAxes: [{
+		                ticks: {
+		                    min: 0,
+                            max: 1000
+		                }
 		            }]
 		        }
 		    }
 		});
-        console.log('chart', myChart);
+        // console.log('chart', myChart);
 	</script>
 {% endblock %}

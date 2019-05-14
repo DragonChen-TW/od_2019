@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block style %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+{% endblock %}
+
+{% block content %}
+<div><canvas id="chart" width="400" height="400"></canvas></div>
+{% endblock %}
+
+{% block script %}
+	<script>
+		var ctx = document.getElementById('chart');
+		var marksData = {
+		  labels: ['醫療', '高速公路', '大眾運輸', '治安', '教育'],
+		  datasets: [{
+		    label: "House A",
+		    backgroundColor: "rgba(200,0,0,0.2)",
+		    data: JSON.parse('{{data1_json | safe}}')
+		  }, {
+		    label: "House B",
+		    backgroundColor: "rgba(0,0,200,0.2)",
+		    data: JSON.parse('{{data2_json | safe}}')
+		  }]
+		};
+
+		var radarChart = new Chart(ctx, {
+		  type: 'radar',
+		  data: marksData,
+		  options: {
+		    	responsive: false,
+		        scales: {
+		            yAxes: [{
+		                ticks: {
+		                    min: 0,
+							max: 1000
+		                }
+		            }]
+		        }
+		    }
+		});
+	</script>
+{% endblock %}

@@ -3,7 +3,7 @@ from django.urls import path
 from .views import (
     HouseListView, CreateHouseView, HouseMapView,
     searchHouseView, ChartView, updateStatView,
-    aboutView, agentView, propertiesView
+    aboutView, agentView, propertiesView, comparisonView
 )
 
 urlpatterns = [
@@ -21,4 +21,5 @@ urlpatterns = [
     path('about/', aboutView),
     path('agent/', agentView),
     path('properties/<int:h_id>/', propertiesView),
+    path('comparison/', comparisonView),
 ]

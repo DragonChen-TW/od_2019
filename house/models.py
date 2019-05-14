@@ -23,6 +23,7 @@ class House(models.Model):
     mrt_score = models.IntegerField(default=-1)
     light_rail_score = models.IntegerField(default=-1)
     police_score = models.IntegerField(default=-1)
+    population_score = models.IntegerField(default=-1)
 
     # Dynamic
     is_near_park = models.BooleanField(default=1)
