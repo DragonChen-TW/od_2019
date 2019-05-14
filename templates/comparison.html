@@ -2,10 +2,49 @@
 
 {% block style %}
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<style media="screen">
+	#contain{
+		margin: 20px;
+	}
+</style>
 {% endblock %}
 
 {% block content %}
-<div><canvas id="chart" width="400" height="400"></canvas></div>
+<div class="row" id="contain">
+	<div class="col">
+		<div class="properties-content-area wow fadeInUp" data-wow-delay="200ms">
+            <div class="properties-content-info">
+                <h2>{{h1.name}}</h2>
+                <div class="properties-location">
+                    <p><i class="fa fa-map-marker" aria-hidden="true"></i> {{h1.address}}</p>
+                </div>
+                <h4 class="properties-rate">${{h1.price}} <span> 萬</span></h4>
+				<ul>
+					<li>屋齡：{{h1.age}}</li>
+					<li>房屋類型：{{h1.type}}</li>
+					<li>最小統計區：{{h1.stat_code}}</li>
+				</ul>
+            </div>
+        </div>
+	</div>
+	<div class="col"><canvas id="chart" width="400" height="400"></canvas></div>
+	<div class="col">
+		<div class="properties-content-area wow fadeInUp" data-wow-delay="200ms">
+            <div class="properties-content-info">
+                <h2>{{h2.name}}</h2>
+                <div class="properties-location">
+                    <p><i class="fa fa-map-marker" aria-hidden="true"></i> {{h2.address}}</p>
+                </div>
+                <h4 class="properties-rate">${{h2.price}} <span> 萬</span></h4>
+				<ul>
+					<li>屋齡：{{h2.age}}</li>
+					<li>房屋類型：{{h2.type}}</li>
+					<li>最小統計區：{{h2.stat_code}}</li>
+				</ul>
+            </div>
+        </div>
+	</div>
+</div>
 {% endblock %}
 
 {% block script %}

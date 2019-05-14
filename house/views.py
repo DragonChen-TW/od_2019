@@ -140,4 +140,5 @@ def comparisonView(request, id1=1, id2=6):
     data1 = [h1.__dict__[f] for f in fields]
     data2 = [h2.__dict__[f] for f in fields]
 
-    return render(request, 'comparison.html', {'data1_json': data1, 'data2_json': data2})
+    return render(request, 'comparison.html',
+        {'h1': h1, 'h2': h2, 'data1_json': data1, 'data2_json': data2})

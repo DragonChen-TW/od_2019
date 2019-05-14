@@ -9,7 +9,13 @@
             height: 100%;
         }
         #map {
-            margin-left: 10%;
+            margin-left: 3%;
+        }
+        #chart1{
+            width: 100%;
+        }
+        #contain{
+            margin: 40px 0px;
         }
     </style>
 
@@ -17,8 +23,10 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container row">
-        <div ><canvas id="chart1" class="col" width="350" height="400"></canvas></div>
+    <div id="contain" class="container row">
+        <div class="col">
+            <canvas id="chart1" class="col" height="400"></canvas>
+        </div>
         <div id="map" class="col"></div>
     </div>
 {% endblock %}
@@ -39,7 +47,6 @@
         var houses = JSON.parse('{{houses | safe}}');
 
         var mark_f = function(e){
-            console.log(e.target.data);
             myChart.data.datasets[0].data = e.target.data;
             myChart.update();
         }
