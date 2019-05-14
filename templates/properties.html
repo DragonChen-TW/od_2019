@@ -26,21 +26,12 @@
         <!-- Properties Content Area -->
         <div class="properties-content-area wow fadeInUp" data-wow-delay="200ms">
             <div class="properties-content-info">
-                <h2>Huge Sunny Villa</h2>
                 <h2>{{ house.name }}</h2>
                 <div class="properties-location">
-                    <p><i class="fa fa-map-marker" aria-hidden="true"></i> 180 York Road, London, UK</p>
-                    <p><i class="fa fa-map-marker" aria-hidden="true"></i> Villa</p>
+                    <p><i class="fa fa-map-marker" aria-hidden="true"></i> {{house.address}}</p>
+                    <p><i class="fa fa-map-marker" aria-hidden="true"></i> Kaohsiung</p>
                 </div>
-                <h4 class="properties-rate">$5400 <span>/ month</span></h4>
-                <p>Buy Confidence, Sell With Success! Our storied approach to real estate development and maximization.</p>
-                <!-- Properties Info -->
-                <div class="properties-info">
-                    <p>Sqft: <span>1.200 m2</span></p>
-                    <p>Beds: <span>04</span></p>
-                    <p>Baths: <span>03</span></p>
-                    <p>Garages: <span>02</span></p>
-                </div>
+                <h4 class="properties-rate">${{house.price}} <span> 萬</span></h4>
             </div>
         </div>
     </div>
@@ -58,21 +49,22 @@
                         <!--Information Content -->
                         <div class="information-content">
                             <ul class="d-flex flex-wrap">
-                                <li><span>Price</span> <span>$ 138,000</span></li>
-                                <li><span>Property Type</span> <span>$ 138,000</span></li>
-                                <li><span>Year Built</span> <span>$ 138,000</span></li>
-                                <li><span>Bathrooms</span> <span>$ 138,000</span></li>
-                                <li><span>Rooms</span> <span>$ 138,000</span></li>
-                                <li><span>Parking lots</span> <span>$ 138,000</span></li>
-                                <li><span>Lot area</span> <span>$ 138,000</span></li>
-                                <li><span>Agent</span> <span>Anthony Noah</span></li>
-                                <li><span>Reference</span> <span>#219</span></li>
-                                <li><span>Contract type</span> <span>Sale</span></li>
-                                <li><span>Beds</span> <span>4</span></li>
-                                <li><span>Garages</span> <span>2</span></li>
-                                <li><span>Home area</span> <span>1200 sqft</span></li>
-                                <li><span>Lot dimensions</span> <span>20x30x40x50</span></li>
+                                <li><span>價格</span> <span>$ {{house.price}}</span></li>
+                                <li><span>屋齡</span> <span>{{house.age}}</span></li>
+                                <li><span>房屋類型</span> <span>{{house.type}}</span></li>
+                                <li><span>是否鄰近公園</span> <span>{{house.is_near_park}}</span></li>
+                                <li><span>最小統計區</span> <span>{{house.stat_code}}</span></li>
                             </ul>
+                        </div>
+                    </div>
+
+                    <!-- Home Transaction History -->
+                    <div class="information-area mb-80 wow fadeInUp" data-wow-delay="200ms">
+                        <h4 class="mb-30">Home Transaction History</h4>
+
+                        <!--Information Content -->
+                        <div class="information-content">
+                            <canvas id="canvas"></canvas>
                         </div>
                     </div>
 
@@ -82,7 +74,7 @@
 
                         <!-- Floor Thumb -->
                         <div class="floor-thumb">
-                            <img src="img/bg-img/68.jpg" alt="">
+                            <img src="{% static 'new/img/bg-img/68.jpg' %}" alt="">
                         </div>
                     </div>
 
@@ -92,136 +84,11 @@
 
                         <!-- Location Maps -->
                         <div class="loction-map">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d19892.026971487212!2d-0.19247374135275525!3d51.4489138369289!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8a00baf21de75%3A0x52963a5addd52a99!2sLondon%2C+UK!5e0!3m2!1sen!2sbd!4v1551753138954" allowfullscreen></iframe>
+                            <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d19892.026971487212!2d-0.19247374135275525!3d51.4489138369289!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8a00baf21de75%3A0x52963a5addd52a99!2sLondon%2C+UK!5e0!3m2!1sen!2sbd!4v1551753138954" allowfullscreen></iframe> -->
+                            <!-- <iframe width="600" height="450" frameborder="0" style="border:0"
+src="https://www.google.com/maps/embed?center={{house.lat}}%2C{{house.lng}}&zoom=15" allowfullscreen></iframe> -->
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3682.8736223589262!2d{{house.lng}}!3d{{house.lat}}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjLCsDM3JzE2LjMiTiAxMjDCsDE2JzA4LjkiRQ!5e0!3m2!1szh-TW!2sbd!4v1557858365668!5m2!1szh-TW!2sbd" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
                         </div>
-
-                        <!-- Single Location Content -->
-                        <div class="single-location-content d-flex align-items-center justify-content-between">
-                            <!-- Location Thumb And Info -->
-                            <div class="location-thumb-info d-flex align-items-center">
-                                <!-- Location Thumb -->
-                                <div class="location-thumb">
-                                    <img src="img/bg-img/69.jpg" alt="">
-                                </div>
-                                <!-- Location Info -->
-                                <div class="location-info">
-                                    <h5>Hospital</h5>
-                                    <p><i class="fa fa-map-marker" aria-hidden="true"></i> 801 Rowan Parkways Apt. 974</p>
-                                    <p><i class="fa fa-location-arrow" aria-hidden="true"></i> 5 km</p>
-                                </div>
-                            </div>
-
-                            <!-- Contact Location -->
-                            <div class="contact-location-btn">
-                                <!-- Phone -->
-                                <a class="phone" href="#"><i class="fa fa-phone" aria-hidden="true"></i></a>
-                                <!-- Share -->
-                                <a class="share" href="#"><i class="fa fa-share" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-
-                        <!-- Single Location Content -->
-                        <div class="single-location-content d-flex align-items-center justify-content-between">
-                            <!-- Location Thumb And Info -->
-                            <div class="location-thumb-info  d-flex align-items-center">
-                                <!-- Location Thumb -->
-                                <div class="location-thumb">
-                                    <img src="img/bg-img/70.jpg" alt="">
-                                </div>
-                                <!-- Location Info -->
-                                <div class="location-info">
-                                    <h5>Hospital</h5>
-                                    <p><i class="fa fa-map-marker" aria-hidden="true"></i> 801 Rowan Parkways Apt. 974</p>
-                                    <p><i class="fa fa-location-arrow" aria-hidden="true"></i> 5 km</p>
-                                </div>
-                            </div>
-
-                            <!-- Contact Location -->
-                            <div class="contact-location-btn">
-                                <!-- Phone -->
-                                <a class="phone" href="#"><i class="fa fa-phone" aria-hidden="true"></i></a>
-                                <!-- Share -->
-                                <a class="share" href="#"><i class="fa fa-share" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-
-                        <!-- Single Location Content -->
-                        <div class="single-location-content d-flex align-items-center justify-content-between">
-                            <!-- Location Thumb And Info -->
-                            <div class="location-thumb-info  d-flex align-items-center">
-                                <!-- Location Thumb -->
-                                <div class="location-thumb">
-                                    <img src="img/bg-img/71.jpg" alt="">
-                                </div>
-                                <!-- Location Info -->
-                                <div class="location-info">
-                                    <h5>Hospital</h5>
-                                    <p><i class="fa fa-map-marker" aria-hidden="true"></i> 801 Rowan Parkways Apt. 974</p>
-                                    <p><i class="fa fa-location-arrow" aria-hidden="true"></i> 5 km</p>
-                                </div>
-                            </div>
-
-                            <!-- Contact Location -->
-                            <div class="contact-location-btn">
-                                <!-- Phone -->
-                                <a class="phone" href="#"><i class="fa fa-phone" aria-hidden="true"></i></a>
-                                <!-- Share -->
-                                <a class="share" href="#"><i class="fa fa-share" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-
-                        <!-- More Location Btn -->
-                        <button class="btn more-location-btn"><i class="fa fa-angle-down" aria-hidden="true"></i></button>
-                    </div>
-
-                    <!-- Agent Information -->
-                    <div class="agent-information-area mb-80 wow fadeInUp" data-wow-delay="200ms">
-                        <h4 class="mb-30">Agent Infomation</h4>
-
-                        <!-- Agent Information Info -->
-                        <div class="agent-information-info d-flex align-items-center">
-                            <!-- Agent Thumb -->
-                            <div class="agent-thumb">
-                                <img src="img/bg-img/72.jpg" alt="">
-                            </div>
-                            <!-- Agent Info -->
-                            <div class="agent-info">
-                                <h4>Jason Johnson</h4>
-                                <!-- Agent Contact -->
-                                <div class="agent-contact d-flex justify-content-between">
-                                    <p>Phone: <span>(12) 456-7890</span></p>
-                                    <p>Email: <span>info.colorlib@gmail.com</span></p>
-                                </div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Risus commodo viverra maecenas accumsan lacus vel facilisis. </p>
-                                <a class="btn rehomes-btn mt-10" href="#">Contact us</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Leave A Reply -->
-                    <div class="rehomes-comment-form mb-80 wow fadeInUp" data-wow-delay="200ms">
-                        <h4 class="mb-30">Leave A Comment</h4>
-
-                        <!-- Form -->
-                        <form class="#" method="post">
-                            <div class="row">
-                                <div class="col-12 col-lg-4">
-                                    <input type="text" name="message-name" class="form-control mb-30" placeholder="Name">
-                                </div>
-                                <div class="col-12 col-lg-4">
-                                    <input type="text" name="phone" class="form-control mb-30" placeholder="Number">
-                                </div>
-                                <div class="col-12 col-lg-4">
-                                    <input type="email" name="message-email" class="form-control mb-30" placeholder="Email">
-                                </div>
-                                <div class="col-12">
-                                    <textarea name="message" class="form-control mb-30" placeholder="Messages"></textarea>
-                                </div>
-                                <div class="col-12">
-                                    <button type="submit" class="btn rehomes-btn mt-15">Send Messages</button>
-                                </div>
-                            </div>
-                        </form>
                     </div>
                 </div>
 
@@ -326,80 +193,97 @@
                                 </div>
                             </form>
                         </div>
-
-                        <!-- Single Properties Widget Area -->
-                        <div class="properties-single-widget-area mb-80 wow fadeInUp" data-wow-delay="200ms">
-                            <h4 class="widget-title mb-30">Recent Properties</h4>
-
-                            <!-- Single Recent Post -->
-                            <div class="single-recent-post d-flex align-items-center">
-                                <!-- Thumb -->
-                                <div class="properties-post-thumb">
-                                    <a href="properties-details.html"><img src="img/bg-img/45.jpg" alt=""></a>
-                                </div>
-                                <!-- Post Content -->
-                                <div class="post-content">
-                                    <a href="properties-details.html" class="post-title">Kennedy Suite</a>
-                                    <p class="properties--location"><i class="fa fa-map-marker" aria-hidden="true"></i> GA 125, Newyork</p>
-                                    <p class="properties--rent">Rent: <span>$7.770.000</span></p>
-                                </div>
-                            </div>
-
-                            <!-- Single Recent Post -->
-                            <div class="single-recent-post d-flex align-items-center">
-                                <!-- Thumb -->
-                                <div class="properties-post-thumb">
-                                    <a href="properties-details.html"><img src="img/bg-img/46.jpg" alt=""></a>
-                                </div>
-                                <!-- Post Content -->
-                                <div class="post-content">
-                                    <a href="properties-details.html" class="post-title">Roob Viaduct</a>
-                                    <p class="properties--location"><i class="fa fa-map-marker" aria-hidden="true"></i> GA 125, Newyork</p>
-                                    <p class="properties--rent">Rent: <span>$7.770.000</span></p>
-                                </div>
-                            </div>
-
-                            <!-- Single Recent Post -->
-                            <div class="single-recent-post d-flex align-items-center">
-                                <!-- Thumb -->
-                                <div class="properties-post-thumb">
-                                    <a href="properties-details.html"><img src="img/bg-img/47.jpg" alt=""></a>
-                                </div>
-                                <!-- Post Content -->
-                                <div class="post-content">
-                                    <a href="properties-details.html" class="post-title">Glover Plains</a>
-                                    <p class="properties--location"><i class="fa fa-map-marker" aria-hidden="true"></i> GA 125, Newyork</p>
-                                    <p class="properties--rent">Rent: <span>$7.770.000</span></p>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- **** Properties-area End **** -->
+{% endblock %}
 
-    <!-- **** Partner Area Start **** -->
-    <div class="partner-area wow fadeInUp" data-wow-delay="200ms">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="partner-logo-slide owl-carousel">
-                        <!-- Single Partner Logo -->
-                        <a href="#" class="partner-logo wow fadeInUp" data-wow-delay="100ms"><img src="img/core-img/1.png" alt=""></a>
-                        <!-- Single Partner Logo -->
-                        <a href="#" class="partner-logo wow fadeInUp" data-wow-delay="300ms"><img src="img/core-img/2.png" alt=""></a>
-                        <!-- Single Partner Logo -->
-                        <a href="#" class="partner-logo wow fadeInUp" data-wow-delay="500ms"><img src="img/core-img/3.png" alt=""></a>
-                        <!-- Single Partner Logo -->
-                        <a href="#" class="partner-logo wow fadeInUp" data-wow-delay="700ms"><img src="img/core-img/4.png" alt=""></a>
-                        <!-- Single Partner Logo -->
-                        <a href="#" class="partner-logo wow fadeInUp" data-wow-delay="900ms"><img src="img/core-img/5.png" alt=""></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- **** Partner Area End **** -->
+{% block script %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+    <script>
+    	window.chartColors = {
+    		red: 'rgb(255, 99, 132)',
+    		orange: 'rgb(255, 159, 64)',
+    		yellow: 'rgb(255, 205, 86)',
+    		green: 'rgb(75, 192, 192)',
+    		blue: 'rgb(54, 162, 235)',
+    		purple: 'rgb(153, 102, 255)',
+    		grey: 'rgb(201, 203, 207)'
+    	};
+
+    	var randomScalingFactor = function(){
+    		return Math.random() * 5 + 2;
+    	};
+
+    	var config = {
+    		type: 'line',
+    		data: {
+    			labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+    			datasets: [{
+    				label: 'Unfilled',
+    				fill: false,
+    				backgroundColor: window.chartColors.blue,
+    				borderColor: window.chartColors.blue,
+    				data: JSON.parse('{{transaction | safe}}'),
+    			}, {
+    				label: 'Dashed',
+    				fill: false,
+    				backgroundColor: window.chartColors.green,
+    				borderColor: window.chartColors.green,
+    				borderDash: [5, 5],
+    				data: [
+    					randomScalingFactor(),
+    					randomScalingFactor(),
+    					randomScalingFactor(),
+    					randomScalingFactor(),
+    					randomScalingFactor(),
+    					randomScalingFactor()
+    				],
+    			}]
+    		},
+    		options: {
+    			responsive: true,
+    			title: {
+    				display: true,
+    				text: 'Home Transaction'
+    			},
+    			tooltips: {
+    				mode: 'index',
+    				intersect: false,
+    			},
+    			hover: {
+    				mode: 'nearest',
+    				intersect: true
+    			},
+    			scales: {
+    				xAxes: [{
+    					display: true,
+    					scaleLabel: {
+    						display: true,
+    						labelString: 'Month'
+    					}
+    				}],
+    				yAxes: [{
+    					display: true,
+    					scaleLabel: {
+    						display: true,
+    						labelString: 'Price'
+    					},
+                        ticks: {
+                            min: 0
+                        }
+    				}]
+    			}
+    		}
+    	};
+
+    	window.onload = function() {
+    		var ctx = document.getElementById('canvas').getContext('2d');
+    		window.myLine = new Chart(ctx, config);
+    	};
+    </script>
 {% endblock %}

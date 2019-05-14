@@ -214,26 +214,27 @@ def getHistoryHouseTransInfo(Lng,Lat,category,district):
     total = result['總價元'].astype(int)
     unitprice = result['單價元平方公尺'].astype(int)
 
-    total_price = total.sum()/len(result)
-    price_per_unit = (unitprice*3.305).sum()/len(result)
+def getHistoryHouseTransInfo(district):
+    data1 = data_folder + 'home_transaction_data.csv'
+    data1 = pd.read_csv(data1,encoding = "utf-8")
+    data2 = data_folder + 'home_transaction_data2.csv'
+    data2 = pd.read_csv(data2,encoding = "utf-8")
 
-    sale_condition = ''
-    if len(result) > 400:
-        sale_condition = '搶手地段'
-    elif len(result) > 250:
-        sale_condition = '熱銷'
-    elif len(result) > 100:
-        sale_condition = '前景看好'
-    else:
-        sale_condition = '普通'
+    home_transaction = pd.concat([data1, data2])
 
-    return {
-        'district': district,
-        'total_price': total_price,
-        'price_per_unit': price_per_unit,
-        'sale_count': len(result),
-        'sale_condition': sale_condition
-    }
+    # house_type = home_transaction[home_transaction['建物型態'] == category]
+    result = home_transaction[home_transaction['鄉鎮市區'] == district]
+    result = result[result['備註'] != '預售屋']
+
+    # filter
+    trans_date = result['交易年月日']
+    result['trans_date'] = \
+        pd.Series(['{}'.format(t[3:5]) for t in result['交易年月日'] if t[3:5] != '01' and t[3:5] != '04' and t[3:5] != '06'])
+
+
+    result['總價元'] = result['總價元'].astype('int')
+    #
+    return list(result.groupby('trans_date')['總價元'].mean())
 
 def search(lng=120.259825, lat=22.6173789, stat_code='A6401-0025-00'):
     # stat_code = 'A6401-0025-00'

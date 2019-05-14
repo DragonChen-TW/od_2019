@@ -8,10 +8,11 @@ import pandas as pd
 #
 from .models import House
 from .auto import get_stat_code
-from .automate.Opendata.index_library import search
+from .automate.Opendata.index_library import search, getHistoryHouseTransInfo
+import numpy as np
 
-b = ['building state' '住宅大樓(11層含以上有電梯)' '公寓(5樓含以下無電梯)' '透天厝' '套房(1房1廳1衛)'
- '華廈(10層含以下有電梯)' '工廠' '農舍' '店面(店鋪)' '辦公商業大樓' '廠辦' '其他' '倉庫']
+b = ['住宅大樓(11層含以上有電梯)' '公寓(5樓含以下無電梯)' '透天厝' '套房(1房1廳1衛)'
+ '華廈(10層含以下有電梯)']
 c = ['The villages and towns urban district' '鼓山區' '苓雅區' '前鎮區' '小港區' '三民區'
  '左營區' '楠梓區' '岡山區' '橋頭區' '鳳山區' '大樹區' '仁武區' '大社區' '阿蓮區' '路竹區' '美濃區' '林園區'
  '大寮區' '鹽埕區' '新興區' '燕巢區' '湖內區' '茄萣區' '鳥松區' '梓官區' '永安區' '旗山區' '內門區' '旗津區'
@@ -106,7 +107,17 @@ def agentView(request):
     return render(request, 'agent.html')
 def propertiesView(request, h_id):
     house = House.objects.get(id=h_id)
-    return render(request, 'properties.html', {'house': house})
+
+    if h_id == 1:
+        district = '鼓山區'
+    else:
+        district = '鹽埕區'
+
+    transaction = getHistoryHouseTransInfo(district)
+    transaction = [np.log10(t) for t in transaction]
+    transaction = json.dumps(transaction)
+
+    return render(request, 'properties.html', {'house': house, 'transaction': transaction})
 def comparisonView(request, id1=1, id2=6):
     h1 = House.objects.get(id=id1)
     h2 = House.objects.get(id=id2)
