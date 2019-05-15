@@ -10,6 +10,8 @@
         }
         #map {
             margin-left: 3%;
+            height: 100%;
+            z-index: 1;
         }
         #chart1{
             width: 100%;
@@ -17,17 +19,59 @@
         #contain{
             margin: 40px 0px;
         }
+        #map_title{
+            position: absolute;
+            text-align: center;
+            left: 25%;
+            top: 2%;
+            width: 50%;
+            background-color: rgba(255,255,255, 0.6);
+            z-index: 10;
+        }
+        #bool_list > li{
+            margin-top: 55px;
+            line-height: 12px;
+        }
     </style>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 {% endblock %}
 
 {% block content %}
-    <div id="contain" class="container row">
-        <div class="col">
-            <canvas id="chart1" class="col" height="400"></canvas>
+    <div class="container ">
+        <div class="row">
+            <div>
+                <input type="checkbox" name="" checked>
+                <div>捷運</div>
+            </div>
+            <div>
+                <input type="checkbox" onclick="minus_light()" checked>
+                <div> 輕軌</div>
+            </div>
         </div>
-        <div id="map" class="col"></div>
+        <div id="contain" class="row">
+            <div>
+                <ul id="bool_list">
+                    <!-- <span>不使用</span> -->
+                    <li><input type="checkbox" name="medi_bool" onclick="change_bool(0)" checked></li>
+                    <li><input type="checkbox" name="free_bool" onclick="change_bool(1)" checked></li>
+                    <li><input type="checkbox" name="traf_bool" onclick="change_bool(2)" checked></li>
+                    <li><input type="checkbox" name="poli_bool" onclick="change_bool(3)" checked></li>
+                    <li><input type="checkbox" name="popu_bool" onclick="change_bool(4)"></li>
+                </ul>
+            </div>
+            <div class="col">
+                <canvas id="chart1" class="col" height="400"></canvas>
+            </div>
+
+            <div class="col">
+                <div id="map_title">
+                    lnglat (<span id="lng">0</span>, <span id="lat">0</span>)
+                </div>
+                <div id="map">
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}
 
@@ -46,10 +90,34 @@
         // get json inside django
         var houses = JSON.parse('{{houses | safe}}');
 
+        var lng = document.getElementById('lng');
+        var lat = document.getElementById('lat');
+
         var mark_f = function(e){
             myChart.data.datasets[0].data = e.target.data;
             myChart.update();
         }
+        function onMapClick(e) {
+            lat.innerText =  Math.floor(e.latlng.lat * 10000) / 10000;
+            lng.innerText =  Math.floor(e.latlng.lng * 10000) / 10000;
+        }
+        function change_bool(i){
+            // console.log(myChart.data.datasets[0].data);
+            var temp = myChart.data.datasets[0].data[i];
+            myChart.data.datasets[0].data[i] = -temp;
+            myChart.update();
+        }
+        function minus_light(){
+            if(myChart.data.datasets[0].data[2] > 500){
+                myChart.data.datasets[0].data[2] = myChart.data.datasets[0].data[2] / 2;
+            }
+            else{
+                myChart.data.datasets[0].data[2] = myChart.data.datasets[0].data[2] * 2;
+            }
+            myChart.update();
+        }
+
+        // function
 
         // draw
         for (var i = 0;i < houses.length;i++){
@@ -62,6 +130,7 @@
             marker.data = [h.medical_score, h.freeway_score, h.traffic_score, h.police_score, h.population_score];
             marker.addEventListener('click', mark_f);
         }
+        map.on('click', onMapClick);
     </script>
 
     <script>
@@ -100,7 +169,7 @@
 		            }],
                     xAxes: [{
 		                ticks: {
-		                    min: 0,
+		                    min: -1000,
                             max: 1000
 		                }
 		            }]

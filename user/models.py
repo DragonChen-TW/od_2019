@@ -35,6 +35,8 @@ class User(AbstractBaseUser, PermissionsMixin):
         ('else', '其他')
     ])
 
+    # ===============Prefer===============
+
     # ===============Permission===============
     is_admin = models.BooleanField(
         'staff status',

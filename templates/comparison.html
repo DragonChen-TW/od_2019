@@ -18,6 +18,8 @@
                 <div class="properties-location">
                     <p><i class="fa fa-map-marker" aria-hidden="true"></i> {{h1.address}}</p>
                 </div>
+
+				<h4 id="h1_total"></h4>
                 <h4 class="properties-rate">${{h1.price}} <span> 萬</span></h4>
 				<ul>
 					<li>屋齡：{{h1.age}}</li>
@@ -35,6 +37,8 @@
                 <div class="properties-location">
                     <p><i class="fa fa-map-marker" aria-hidden="true"></i> {{h2.address}}</p>
                 </div>
+
+				<h4 id="h2_total"></h4>
                 <h4 class="properties-rate">${{h2.price}} <span> 萬</span></h4>
 				<ul>
 					<li>屋齡：{{h2.age}}</li>
@@ -49,17 +53,23 @@
 
 {% block script %}
 	<script>
+		var data1 = JSON.parse('{{data1_json | safe}}');
+		var data2 = JSON.parse('{{data2_json | safe}}');
+
+		document.getElementById('h1_total').innerText =  'Total: ' + (data1[0] + data1[1] + data1[2] + data1[3] + data1[4]) / 5;
+		document.getElementById('h2_total').innerText =  'Total: ' + (data2[0] + data2[1] + data2[2] + data2[3] + data2[4]) / 5;
+
 		var ctx = document.getElementById('chart');
 		var marksData = {
 		  labels: ['醫療', '高速公路', '大眾運輸', '治安', '教育'],
 		  datasets: [{
 		    label: "House A",
 		    backgroundColor: "rgba(200,0,0,0.2)",
-		    data: JSON.parse('{{data1_json | safe}}')
+		    data: data1
 		  }, {
 		    label: "House B",
 		    backgroundColor: "rgba(0,0,200,0.2)",
-		    data: JSON.parse('{{data2_json | safe}}')
+		    data: data2
 		  }]
 		};
 

@@ -32,7 +32,10 @@ def HouseMapView(request):
     traffic_score = [[int(h[f]) for f in traffic_fields] for h in houses]
     for i, h in enumerate(houses):
         houses[i]['traffic_score'] = sum(traffic_score[i]) / len(traffic_fields)
-    print(houses)
+
+    for i, h in enumerate(houses):
+        houses[i]['population_score'] = -houses[i]['population_score']
+
     houses_json = json.dumps(houses, ensure_ascii=False)
     # print(houses_json)
 
