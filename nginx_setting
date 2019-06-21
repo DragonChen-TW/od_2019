@@ -1,0 +1,19 @@
+upstream django {
+	#server unix://home/smalldragon/code/od_2019/od_2019.sock; # for a file socket
+	server 127.0.0.1:8999; # for a web port socket (we'll use this first)
+}
+
+server {
+        listen 80;
+
+        server_name od.smalldragon.tw;
+
+		location /static {
+			alias /home/smalldragon/code/od_2019/static;
+		}
+
+        location / {
+			uwsgi_pass  django;
+	        include     /etc/nginx/uwsgi_params;
+        }
+}
